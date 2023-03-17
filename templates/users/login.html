@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container">
+<h1 class="text-center">{{ title }}</h1>
+    <hr>
+
+<form action="" method="post" class="form">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      提交
+    </button>
+  {% endbuttons %}
+</form>
+<p class="text-info">还没有账号？ 去 <a href="{% url 'users:register' %}">注册</a> 一个!</p>
+</div>
+{% endblock content %}

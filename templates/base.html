@@ -1,0 +1,54 @@
+﻿{% extends '_layout.html' %}
+{% load static %}
+
+
+{% block nav %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<div class="container-fluid">
+    <a class="navbar-brand" href="#"><i class="fas fa-sync"></i></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a href="/" class="nav-link{% if request.path == '/' %} active{% endif %}"><i class="fas fa-home"></i> Homepage</a></li>
+          <li class="nav-item"><a href="{% url 'tasks:install_instruction' %}" class="nav-link{% if request.path == '/install' %} active{% endif %}"><i class="fas fa-crosshairs"></i> Install the SSH service</a></li>
+
+      </ul>
+
+      <ul class="navbar-nav float-right">
+          {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-user" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Welcome <i class="fas fa-user-alt"></i> {{ user.username }}</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown-user">
+                    {% if user.is_superuser %}<a class="dropdown-item" href="/admin"><i class="fas fa-user-shield"></i> 后台管理</a>{% endif %}
+                    <a class="dropdown-item" href="{% url 'users:password_change' %}"><i class="fas fa-key"></i> 修改密码</a>
+                    <a class="dropdown-item" href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt"></i> 退出登录</a>
+                </div>
+            </li>
+
+              {% else %}
+              <li class="nav-item"><span class="navbar-text">请</span></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'users:login' %}"><i class="fas fa-sign-in-alt"></i> 登录</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'users:register' %}"><i class="fas fa-user-plus"></i> 注册</a></li>
+          {% endif %}
+      </ul>
+    </div>
+</div>
+     </nav>
+{% endblock nav %}
+
+{% block footer %}
+<footer class="footer text-danger">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6"><i class="fas fa-book"></i> 数据平台</div>
+              <div class="col-md-6 d-none d-md-block d-lg-block"><span class="float-right ">Django <i class="fa fa-fw fa-copyright"></i>2020</span></div>
+          </div>
+      </div>
+</footer>
+{% endblock footer %}

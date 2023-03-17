@@ -1,0 +1,60 @@
+{% extends 'bootstrap4/bootstrap4.html' %}
+{% load static %}
+{% block bootstrap4_title %}
+    {% if title %}
+        {{ title }}
+    {% else %}
+        在线阅读书店
+    {% endif %}
+{% endblock bootstrap4_title %}
+
+{% block bootstrap4_extra_head %}
+    {% block metas %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="wap-font-scale" content="no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    {% endblock %}
+    <link href="{% static 'css/fixed_layout.css' %}" rel="stylesheet">
+    <link href="" rel="icon" type="image/x-icon" />
+    <link href="{% static 'fav.ico' %}" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'fontawesome-free-5.9.0-web/css/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'toast/toast.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'select2/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'tempusdominus-datetime-picker/css/tempusdominus-bootstrap-4.min.css' %}" />
+    {% block style %}{% endblock style %}
+{% endblock bootstrap4_extra_head %}
+
+{% block bootstrap4_before_content %}
+<header>{% block nav %}{% endblock nav %}</header>
+{% block messages %}
+    {% load bootstrap4 %}
+    {% if messages %}
+    <div class="container">
+    {% bootstrap_messages %}
+    </div>
+    {% endif %}
+{% endblock messages %}
+{% block ads %}{% endblock ads %}
+{% endblock %}
+
+{% block bootstrap4_content %}{% block content %}{% endblock content %}{% endblock %}
+{% block bootstrap4_after_content %}{% block footer %}{% endblock footer %}{% endblock %}
+
+
+{% block bootstrap4_extra_script %}
+    <script src="{% static 'toast/toast.min.js' %}"></script>
+    <script src="{% static 'moment.js/moment-with-locales.min.js' %}"></script>
+    <script src="{% static 'tempusdominus-datetime-picker/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+    <script src="{% static 'select2/js/select2.full.min.js' %}"></script>
+    {% block script %}{% endblock %}
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    <style>
+    pre {
+        border: 1px solid black;
+        background-color: black;
+        color: green;
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">OpenSSH Service Installation</h1>
+    <hr>
+    <h2># 1 Download</h2>
+    <a href="/media/installer/install.exe"><i class="fas fa-download"></i> Installation Package</a>
+    <h2># 2 Commands in Package  </h2>
+    <pre>
+INFO: Showing help with the command 'install.exe -- --help'.
+
+NAME
+    install.exe
+
+SYNOPSIS
+    install.exe COMMAND
+
+COMMANDS
+    COMMAND is one of the following:
+
+     install
+       安装 ssh-server
+
+     uninstall
+       卸载 ssh-server
+
+     setup
+       设置网站地址，数据举例： http://127.0.0.1/8000
+
+    </pre>
+    <h2># 3 Steps to Use</h2>
+    <ol>
+    <li>If you can see this page, it proves that the communication between your machine and the server is normal.</li>    
+    <li>Download installation package of OpenSSH.</li>
+    <li>Run <code>CMD</code> or <code>PowerShell</code> as an administrator, and then run <code>install.exe</code> in the command window.</li>
+    <li>Unless you want to uninstall, you will need to use the setup command to setup the site address，<code id="addr"></code></li>
+    </ol>
+    <h2># 4 Check</h2>
+    <button class="btn btn-primary" onclick="checkSSH()">Check</button>
+
+        <span id="isSuccess" class="text-info"></span>
+
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+    let hint = document.getElementById('isSuccess');
+    let full = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+    document.getElementById('addr').innerText = `install.exe setup ${full}`;
+    function checkSSH() {
+        $.ajax({
+            url: '{% url "tasks:check_ssh" %}',
+            type: 'get',
+            success: function (r) {
+                if (r.status === true){
+                    hint.innerText = 'Success! A connection has been established with the server.'
+                    hint.className = 'text-success';
+                } else {
+                    hint.innerText = 'Failed! Unable to connect to server.';
+                    hint.className = 'text-danger';
+                }
+            }
+        })
+    }
+    </script>
+{% endblock %}
